@@ -1,0 +1,20 @@
+﻿@model fullstack_project.Models.Student     //Need to transfer data with Models (more professional, more exactly)
+@{
+    var viewDataStudent = ViewData["students"] as List<Student>; //transfer data with ViewData
+}
+
+<div>
+    <h4>Student</h4>
+    <hr />
+    <dl class="row">
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+
+    display name of student
+    for (Student s : students) {
+        @viewDataStudent[0].Name;
+    }
+</div>
