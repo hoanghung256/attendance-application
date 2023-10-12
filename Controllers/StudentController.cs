@@ -10,10 +10,9 @@ namespace fullstack_project.Controllers
 		// GET: StudentController
 		public ActionResult Index()
 		{
-            StudentDAO studentDAO = new StudentDAO();
-            List<Student> students = studentDAO.GetStudentList();
-            ViewData["students"] = students;
-            return View();
+			StudentDAO studentDAO = new StudentDAO();
+			List<Student> students = studentDAO.GetStudentList();
+			return View(students);
 		}
 
 		// GET: StudentController/Details/5
