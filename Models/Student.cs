@@ -2,9 +2,9 @@
 {
     public class Student
     {
-        public int Id;
-        public string Name;
-        public int Age; 
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Age { get; set; }
 
         public Student(int Id, string Name, int Age)
         {
