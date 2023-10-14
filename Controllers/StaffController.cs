@@ -5,14 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace fullstack_project.Controllers
 {
-	public class StudentController : Controller
+	public class StaffController : Controller
 	{
 		// GET: StudentController
 		public ActionResult Index()
 		{
-			StudentDAO studentDAO = new StudentDAO();
-			List<Student> students = studentDAO.GetStudentList();
-			return View(students);
+			StaffDAO staffDAO = new StaffDAO();
+			//List<Staff> staffs = studentDAO.GetStaffList();
+			return View(staffDAO.SelectAll());
 		}
 
 		// GET: StudentController/Details/5

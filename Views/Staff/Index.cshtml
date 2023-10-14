@@ -1,4 +1,4 @@
-﻿@model List<fullstack_project.Models.Student>
+﻿@model List<fullstack_project.Models.Staff>
 
 
 <div>   
@@ -10,10 +10,11 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>
-    <h3>Display all name in list</h3>
-    @foreach (var student in Model)
+
+    <h3>Display all staff name in list</h3>
+    @foreach (var staff in Model)
     {
-        <p>@student.Name</p> 
+        <p>@staff.ToString()</p> 
     }
 
 </div>
