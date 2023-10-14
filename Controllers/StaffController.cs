@@ -12,7 +12,7 @@ namespace fullstack_project.Controllers
 		{
 			StaffDAO staffDAO = new StaffDAO();
 			//List<Staff> staffs = studentDAO.GetStaffList();
-			return View(staffDAO.SelectAll());
+            return View(staffDAO.SelectAll());
 		}
 
 		// GET: StudentController/Details/5

@@ -6,6 +6,8 @@
         public string Name { get; set; }
         public int Age { get; set; }
 
+        public Staff() { }
+
         public Staff(int Id, string Name, int Age)
         {
             this.Id = Id;
