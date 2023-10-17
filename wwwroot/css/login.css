@@ -1,0 +1,50 @@
+﻿body {
+    background-color: rgba(69, 105, 144, 1);
+}
+
+.login {
+    overflow: hidden;
+    background-color: white;
+    padding: 40px 30px 30px 30px;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    @include transform(translate(-50%, -50%));
+    @include transition(transform 300ms, box-shadow 300ms);
+    box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+    &::before, &::after
+
+{
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-top-left-radius: 40%;
+    border-top-right-radius: 45%;
+    border-bottom-left-radius: 35%;
+    border-bottom-right-radius: 40%;
+    z-index: -1;
+}
+
+> input {
+    font-family: $fontAsap;
+    display: block;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white;
+    width: 100%;
+    border: 0;
+    padding: 10px 10px;
+    margin: 15px -10px;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(white, 0.6);
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 12px;
+}
