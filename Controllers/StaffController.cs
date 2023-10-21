@@ -1,4 +1,4 @@
-﻿using fullstack_project.DAO;
+﻿using fullstack_project.Models.DAO;
 using fullstack_project.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +10,9 @@ namespace fullstack_project.Controllers
 		// GET: StudentController
 		public ActionResult Index()
 		{
-			StaffDAO staffDAO = new StaffDAO();
+            StaffDAO staffDAO = new StaffDAO();
 			//List<Staff> staffs = studentDAO.GetStaffList();
-            return View(staffDAO.SelectAll());
+			return View();
 		}
 
 		// GET: StudentController/Details/5

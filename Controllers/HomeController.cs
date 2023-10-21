@@ -1,4 +1,4 @@
-﻿using fullstack_project.DAO;
+﻿using fullstack_project.Models.DAO;
 using fullstack_project.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -21,8 +21,8 @@ namespace fullstack_project.Controllers
 
         public IActionResult Privacy()
         {
-            StaffDAO staffDAO = new StaffDAO();
-            staffDAO.Add(new Staff(4, "Nguyen Van D", 22));
+            //StaffDAO staffDAO = new StaffDAO();
+            //staffDAO.Add(new Staff(4, "Nguyen Van D", 22));
             return View();
         }
 

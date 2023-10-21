@@ -1,0 +1,26 @@
+﻿@model fullstack_project.Models.LoginModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login page</title>
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true">
+</head>
+<body>
+    <form asp-controller="Account" asp-action="Login" method="post" class="login">
+        <div class="text-center">
+            <h2>Member Login</h2>
+        </div>
+
+        <input type="text" placeholder="Username" name="Username">
+        <input type="password" placeholder="Password" name="Password">
+
+        <button>Login</button>
+    </form>
+</body>
+</html>
+
