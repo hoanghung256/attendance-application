@@ -16,13 +16,23 @@ namespace fullstack_project.Controllers
 
         public IActionResult Index()
         {
+            var userLogedIn = HttpContext.Request.Cookies["userLogedIn"];
+            if (userLogedIn == null || userLogedIn != "true")
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
             return View();
         }
 
         public IActionResult Privacy()
         {
-            //StaffDAO staffDAO = new StaffDAO();
-            //staffDAO.Add(new Staff(4, "Nguyen Van D", 22));
+            var userLogedIn = HttpContext.Request.Cookies["userLogedIn"];
+            if (userLogedIn == null || userLogedIn != "true")
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
             return View();
         }
 

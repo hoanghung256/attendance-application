@@ -23,6 +23,7 @@ namespace fullstack_project.Controllers
             {
                 Console.WriteLine(model.Username);
                 Console.WriteLine(model.Password);
+                Response.Cookies.Append("userLogedIn", "true");
                 return View("LoginSucceed");
             }
             return View("LoginFailed");

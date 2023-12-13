@@ -10,10 +10,16 @@ namespace fullstack_project.Controllers
 		// GET: StudentController
 		public ActionResult Index()
 		{
+            var userLogedIn = HttpContext.Request.Cookies["userLogedIn"];
+            if (userLogedIn == null || userLogedIn != "true")
+            {
+				return RedirectToAction("Login", "Account");
+               
+            }
             StaffDAO staffDAO = new StaffDAO();
-			//List<Staff> staffs = studentDAO.GetStaffList();
-			return View();
-		}
+            List<Staff> staffs = staffDAO.SelectAll();
+            return View(staffs);
+        }
 
 		// GET: StudentController/Details/5
 		public ActionResult Details(int id)

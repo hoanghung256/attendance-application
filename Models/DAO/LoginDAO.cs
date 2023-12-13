@@ -29,7 +29,6 @@ namespace fullstack_project.Models.DAO
                         while (reader.Read()) {
                             loginModel.Username = (string)reader[0];
                             loginModel.Password = (string)reader[1];
-
                         }
                             
                     }
