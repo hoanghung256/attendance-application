@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@using (Html.BeginForm("CheckIn", "Attendance", FormMethod.Post))
+{
+    <div>
+        <button type="submit">CHECK IN</button>
+    </div>
+
+    <div>
+        <label class="form-label">Choose position: </label>
+
+        <select class="form-select" name="position">
+            <option value="Office">Office</option>
+            <option value="Home">Home</option>
+            <option value="Go business">Go business</option>
+        </select>
+    </div>
+}
+
+<div>
+    <button>@Html.ActionLink("CHECK OUT", "CheckOut", "Attendance", null, new { @class = "text-decoration-none text-dark" })</button>
+</div>
+
+

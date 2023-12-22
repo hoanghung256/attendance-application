@@ -7,7 +7,7 @@ namespace fullstack_project.Models.DAO
 {
     public class StaffDAO
     {
-        static string connString = "Data Source=localhost; Initial Catalog=myFullstackDB; User ID=SA; Password=2562004; Integrated Security=True";      //a key to connect to a SQL server
+        static string connString = "Data Source=localhost; Initial Catalog=AttendanceApplication; User ID=SA; Password=2562004; Integrated Security=True";      //a key to connect to a SQL server
         public List<Staff> SelectAll()
         {
             List<Staff> staffList = new List<Staff>();

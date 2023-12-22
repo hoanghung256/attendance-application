@@ -16,17 +16,19 @@ namespace fullstack_project.Controllers
         {
             string username = model.Username;
             string password = model.Password;
-            
-            LoginDAO loginDAO = new LoginDAO(); 
+
+            LoginDAO loginDAO = new(); 
             model = loginDAO.checkLogin(username, password);
             if (model.Username != null)
             {
                 Console.WriteLine(model.Username);
                 Console.WriteLine(model.Password);
+                Console.WriteLine(model.Role);
                 Response.Cookies.Append("userLogedIn", "true");
-                return View("LoginSucceed");
+                Response.Cookies.Append("username", username);
+                return RedirectToAction("Dashboard", "Attendance");
             }
-            return View("LoginFailed");
+            return View();
         }
     }
 }

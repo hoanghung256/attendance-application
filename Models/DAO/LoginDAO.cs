@@ -5,7 +5,7 @@ namespace fullstack_project.Models.DAO
 {
     public class LoginDAO
     {
-        static string connString = "Data Source=localhost; Initial Catalog=myFullstackDB; User ID=SA; Password=2562004; Integrated Security=True";
+        private const string connString = "Data Source=localhost; Initial Catalog=AttendanceApplication; User ID=SA; Password=2562004; Integrated Security=True";
         public LoginModel checkLogin(string username, string password)
         {
             LoginModel loginModel = new LoginModel();
@@ -16,9 +16,9 @@ namespace fullstack_project.Models.DAO
                 try
                 {
                     int timeout = 30;       //wait time for SQL commands
-                    string commandText = "SELECT * FROM [myFullstackDB].[dbo].[Account]" +
+                    string commandText = "SELECT * FROM [AttendanceApplication].[dbo].[Account]" +
                         "WHERE username ='" + username + "' AND password = '" + password + "'";     //contain SQL commands
-                    SqlCommand command = new SqlCommand(commandText, (SqlConnection)transaction.Connection, (SqlTransaction)transaction);
+                    SqlCommand command = new SqlCommand(commandText, transaction.Connection as SqlConnection, (SqlTransaction)transaction);
                     command.CommandTimeout = timeout;       //set time out for command, if SQL commands execute beyound this time, it will be terminated and throw an exception
 
                     // load
@@ -29,6 +29,7 @@ namespace fullstack_project.Models.DAO
                         while (reader.Read()) {
                             loginModel.Username = (string)reader[0];
                             loginModel.Password = (string)reader[1];
+                            loginModel.Role = (string)reader[2];
                         }
                             
                     }
