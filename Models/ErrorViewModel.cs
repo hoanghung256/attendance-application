@@ -1,4 +1,4 @@
-namespace fullstack_project.Models
+namespace AttendanceApplication.Models
 {
     public class ErrorViewModel
     {

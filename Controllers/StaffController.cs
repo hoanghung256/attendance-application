@@ -1,9 +1,8 @@
-﻿using fullstack_project.Models.DAO;
-using fullstack_project.Models;
-using Microsoft.AspNetCore.Http;
+﻿using AttendanceApplication.Models;
+using AttendanceApplication.Models.DAO;
 using Microsoft.AspNetCore.Mvc;
 
-namespace fullstack_project.Controllers
+namespace AttendanceApplication.Controllers	
 {
 	public class StaffController : Controller
 	{

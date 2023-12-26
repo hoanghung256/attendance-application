@@ -1,9 +1,9 @@
-﻿using fullstack_project.Models.DAO;
-using fullstack_project.Models;
+﻿using AttendanceApplication.Models.DAO;
+using AttendanceApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace fullstack_project.Controllers
+namespace AttendanceApplication.Controllers
 {
     public class HomeController : Controller
     {

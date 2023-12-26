@@ -1,9 +1,7 @@
-﻿using fullstack_project.Models;
-using System.Data;
-using System.Data.Common;
+﻿using System.Data.Common;
 using System.Data.SqlClient;
 
-namespace fullstack_project.Models.DAO
+namespace AttendanceApplication.Models.DAO
 {
     public class StaffDAO
     {

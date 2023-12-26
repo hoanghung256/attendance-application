@@ -1,5 +1,6 @@
-﻿@{
-    ViewData["Title"] = "Dashboard";
+﻿@model AttendanceApplication.Models.AttendanceStatus;
+@{
+    ViewData["Title"] = "Home";
 }
 
 @using (Html.BeginForm("CheckIn", "Attendance", FormMethod.Post))
@@ -22,5 +23,9 @@
 <div>
     <button>@Html.ActionLink("CHECK OUT", "CheckOut", "Attendance", null, new { @class = "text-decoration-none text-dark" })</button>
 </div>
+
+
+
+
 
 

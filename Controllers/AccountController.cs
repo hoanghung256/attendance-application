@@ -1,16 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using fullstack_project.Models;
-using fullstack_project.Models.DAO;
+using AttendanceApplication.Models;
+using AttendanceApplication.Models.DAO;
 
-namespace fullstack_project.Controllers
+namespace AttendanceApplication.Controllers
 {
     public class AccountController : Controller
     {
         //Get: Login
-        public IActionResult Login()
-        {
-            return View();
-        }
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
@@ -26,7 +22,7 @@ namespace fullstack_project.Controllers
                 Console.WriteLine(model.Role);
                 Response.Cookies.Append("userLogedIn", "true");
                 Response.Cookies.Append("username", username);
-                return RedirectToAction("Dashboard", "Attendance");
+                return RedirectToAction("Index", "Attendance");
             }
             return View();
         }

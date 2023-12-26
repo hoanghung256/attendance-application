@@ -1,7 +1,7 @@
 ﻿using System.Data.SqlClient;
 using System.Data.Common;
 
-namespace fullstack_project.Models.DAO
+namespace AttendanceApplication.Models.DAO
 {
     public class LoginDAO
     {
