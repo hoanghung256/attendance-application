@@ -7,24 +7,38 @@ namespace AttendanceApplication.Controllers
     public class AccountController : Controller
     {
         //Get: Login
+        public IActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         public IActionResult Login(LoginModel model)
         {
             string username = model.Username;
             string password = model.Password;
-
-            LoginDAO loginDAO = new(); 
+            
+            LoginDAO loginDAO = new LoginDAO(); 
             model = loginDAO.checkLogin(username, password);
-            if (model.Username != null)
+            if (model.Username == null)
             {
-                Console.WriteLine(model.Username);
-                Console.WriteLine(model.Password);
-                Console.WriteLine(model.Role);
-                Response.Cookies.Append("userLogedIn", "true");
-                Response.Cookies.Append("username", username);
-                return RedirectToAction("Index", "Attendance");
+                ViewBag.Message = "Login failed. Please try again!";
+                return View();
+            } 
+            Response.Cookies.Append("userLogedIn", "true");
+            Response.Cookies.Append("username", username);
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult LogOut()
+        {
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
             }
-            return View();
+
+            return RedirectToAction("Login");
         }
     }
 }
