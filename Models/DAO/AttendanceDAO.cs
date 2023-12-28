@@ -7,93 +7,76 @@ namespace AttendanceApplication.Models.DAO
     {
         private const string connString = "Data Source=localhost; Initial Catalog=AttendanceApplication; User ID=SA; Password=2562004; Integrated Security=True";
 
-        public AttendanceDAO() { }
+        public AttendanceDAO() { }  
 
-        public AttendanceStatus InsertCheckInStatus(string username, string startTime, string currentDate, string position)
+        public bool InsertCheckInStatus(string username, string curentTime, string curentDate, string position)
         {
             using (SqlConnection dbConnection = new SqlConnection(connString))
             {
-                dbConnection.Open();
-                using (DbTransaction transaction = dbConnection.BeginTransaction())
+                dbConnection.Open();   
+                DbTransaction transaction = dbConnection.BeginTransaction();
+                try
                 {
-                    try
-                    {
-                        string query = "INSERT INTO [AttendanceApplication].[dbo].[Attendance] (username, start_time, attendance_date, position) " +
-                         "VALUES (@Username, @StartTime, @CurrentDate, @Position)";
+                    string commandText = "INSERT INTO [AttendanceApplication].[dbo].[Attendance] (username, start_time, attendance_date, position) " +
+                        "VALUES ('" + username + "','" + curentTime + "', '" + curentDate + "', '" + position + "')";  
+                    SqlCommand command = new SqlCommand(commandText, transaction.Connection as SqlConnection, (SqlTransaction)transaction);
+                    command.CommandTimeout = 30;
 
-                        using (SqlCommand command = new SqlCommand(query, dbConnection))
-                        {
-                            command.Transaction = (SqlTransaction)transaction;
-                            command.Parameters.AddWithValue("@Username", username);
-                            command.Parameters.AddWithValue("@StartTime", startTime);
-                            command.Parameters.AddWithValue("@CurrentDate", currentDate);
-                            command.Parameters.AddWithValue("@Position", position);
+                    command.ExecuteNonQuery(); // Execute the command
 
-                            command.ExecuteNonQuery();
-                            transaction.Commit();
-                        }
-
-                        // if insert, update, delete use Commit()
-                        return new AttendanceStatus(username, TimeOnly.Parse(startTime), DateOnly.Parse(currentDate), position);
-                    }
-                    catch (Exception ex)
-                    {
-                        // if exception occur => use rollback to prevent data lossing
-                        transaction.Rollback();
-                        Console.WriteLine(ex.StackTrace);
-                        Console.WriteLine(ex.Message);
-                        throw;
-                    }
-                    finally
-                    {
-                        dbConnection.Close();
-                    }
+                    // if insert, update, delete use Commit()
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    // if exception occur => use rollback to prevent data lossing
+                    transaction.Rollback();
+                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(ex.Message);
+                    return false;
+                    throw;
+                }
+                finally
+                {
+                    dbConnection.Close();
                 }
             }
         }
 
-        public bool UpdateCheckOutStatus(string username, string finishTime)
+        public bool UpdateCheckOutStatus(string username, string curentTime)
         {
             using (SqlConnection dbConnection = new SqlConnection(connString))
             {
                 dbConnection.Open();
-                using (DbTransaction transaction = dbConnection.BeginTransaction())
+                DbTransaction transaction = dbConnection.BeginTransaction();
+                try
                 {
-                    try
-                    {
-                        string query = "UPDATE [AttendanceApplication].[dbo].[Attendance] " +
-                            "SET finish_time=@FinishTime " +
-                            "WHERE username=@Username AND finish_time IS NULL";
+                    string commandText = "UPDATE [AttendanceApplication].[dbo].[Attendance] " +
+                        "SET finish_time='" + curentTime + "' " +
+                        "WHERE username='" + username + "' AND finish_time IS NULL";
+                    SqlCommand command = new SqlCommand(commandText, transaction.Connection as SqlConnection, (SqlTransaction)transaction);
+                    command.CommandTimeout = 30;
 
-                        using (SqlCommand command = new SqlCommand(query, dbConnection))
-                        {
-                            command.Transaction = (SqlTransaction)transaction;
-                            command.Parameters.AddWithValue("@Username", username);
-                            command.Parameters.AddWithValue("@FinishTime", finishTime);
+                    command.ExecuteNonQuery(); // Execute the command
 
-                            command.CommandTimeout = 30;
-                            command.ExecuteNonQuery();
-                        }
-
-                        // if insert, update, delete use Commit()
-                        transaction.Commit();
-                        return true;
-                    }
-                    catch (Exception ex)
-                    {
-                        // if exception occur => use rollback to prevent data lossing
-                        transaction.Rollback();
-                        Console.WriteLine(ex.StackTrace);
-                        Console.WriteLine(ex.Message);
-                        return false;
-                        throw;
-                    }
-                    finally
-                    {
-                        dbConnection.Close();
-                    }
+                    // if insert, update, delete use Commit()
+                    transaction.Commit();
+                    return true;
                 }
-
+                catch (Exception ex)
+                {
+                    // if exception occur => use rollback to prevent data lossing
+                    transaction.Rollback();
+                    Console.WriteLine(ex.StackTrace);
+                    Console.WriteLine(ex.Message);
+                    return false;
+                    throw;
+                }
+                finally
+                {
+                    dbConnection.Close();
+                }
             }
         }
     }

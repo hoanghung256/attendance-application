@@ -2,11 +2,11 @@
 {
     public class AttendanceStatus
     {
-        public string Username { get; set; }
-        public TimeOnly StartTime { get; set; }
-        public TimeOnly FinishTime { get; set; }
-        public DateOnly AttendanceDate { get; set; }
-        public string Position { get; set; }
+        private string Username { get; set; }
+        private TimeOnly StartTime { get; set; }
+        private TimeOnly FinishTime { get; set; }
+        private DateOnly AttendanceDate { get; set; }
+        private string Position { get; set; }
 
         public AttendanceStatus() { }
 
