@@ -9,34 +9,55 @@
     <link rel="stylesheet" href="~/AttendanceApplication.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AttendanceApplication</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Attendance" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-                        </li>
-                    </ul>
+    <div class="p-3">
+        <div class="header bg-white p-3">
+            <a class="navbar-brand text-black" asp-area="" asp-controller="Account" asp-action="Index">AttendanceApplication</a>
+        </div>
+
+        <div class="container-fluid p-3">
+            <div class="body row">
+                <!-- Side Bar -->
+                <div class="side-bar col-sm-3 col-lg-2">
+                    <nav class="navbar navbar-expand-sm navbar-light bg-white border-right flex-column justify-content-start">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="navbar-collapse collapse">
+                            <ul class="navbar-nav flex-column">
+                                <li class="nav-item d-inline-flex">
+                                    <i class="bi bi-house"></i>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Attendance" asp-action="Index">Home</a>
+                                </li>
+                                <li class="nav-item d-inline-flex">
+                                    <i class="bi bi-calendar"></i>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Attendance</a>
+                                </li>
+                                <li class="nav-item d-inline-flex">
+                                    <i class="bi bi-envelope-paper"></i>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Leave Apply</a>
+                                </li>
+                                <li class="nav-item d-inline-flex">
+                                    <i class="bi bi-heart-pulse"></i>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Health Care</a>
+                                </li>
+                                <li class="nav-item d-inline-flex">
+                                    <i class="bi bi-box-arrow-left"></i>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+
+                <!-- Page Content -->
+                <div class="main-content container col-sm-9 col-lg-10 bg-white p-4">
+                    <main role="main">
+                        @RenderBody()
+                    </main>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
 
    @* <footer class="border-top footer text-muted">
