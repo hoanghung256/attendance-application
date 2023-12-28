@@ -22,7 +22,7 @@ namespace AttendanceApplication.Controllers
             model = loginDAO.checkLogin(username, password);
             if (model.Username == null)
             {
-                ViewBag.Message = "Login failed. Please try again!";
+                ViewBag.Error = "Login failed. Please try again!";
                 return View();
             } 
             Response.Cookies.Append("userLogedIn", "true");

@@ -1,8 +1,83 @@
-﻿
-@{
-    ViewData["Title"] = "Home Page";
+﻿@{
+    ViewData["Title"] = "Home";
 }
 
+<div class="clock d-flex flex-column align-items-center">
+    <p class="display-3 font-weight-bold" id="day"></p>
+    <p class="display-6 font-weight-bold" id="date"></p>
+    <p class="display-6 font-weight-bold" id="time"></p>
+</div>
 
-<h1>@ViewData["Title"]</h1>
+<div class="row pt-4">
+    <div class="col-6 d-flex justify-content-center">
+        <div>
+            <button type="button" class="submit-button" data-toggle="ajax-modal-checkin" data-target="#checkInResult" data-url="@Url.Action("CheckIn")">CHECK IN</button>
+
+            <div class="form pt-5">
+                <label class="form-label">Choose working position: </label>
+
+                <select class="form-select" name="position">
+                    <option value="Office">Office</option>
+                    <option value="Home">Home</option>
+                    <option value="Go business">Go business</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-6 d-flex justify-content-center">
+        <div>
+            <button type="button" class="submit-button" data-toggle="ajax-modal-checkout" data-target="#checkOutResult">@Html.ActionLink("CHECK OUT", "CheckOut", "Home", null, new { @class = "text-decoration-none" })</button>
+        </div>
+    </div>
+</div>
+
+<div id="PlaceHolderHere"></div>
+
+<script type="text/javascript">
+    let daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thusday", "Friday", "Saturday", "Sunday"];
+
+    let timeAPI = "https://worldtimeapi.org/api/timezone/Asia/Ho_Chi_Minh";
+
+    function fetchAPI() {
+        fetch(timeAPI)
+            .then(response => response.json())
+            .then(data => {
+                const day = document.getElementById('day')
+                const time = document.getElementById('time');
+                const date = document.getElementById('date');
+
+                if (parseInt(data.datetime.substring(11, 13)) < 12) {
+                    time.innerText = data.datetime.substring(11, 16) + " AM";
+                } else {
+                    time.innerText = data.datetime.substring(11, 16) + " PM";
+                }
+                date.innerText = data.datetime.substring(0, 10);
+                day.innerText = daysOfWeek[data.day_of_week];
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    fetchAPI();
+</script>
+
+<style>
+    .submit-button {
+        width: 150px;
+        height: 80px;
+        border-radius: 15px;
+        border-color: cornflowerblue;
+        background-color: var(--lightSteel);
+    }
+</style>
+
+
+
+
+
+
+
+
+
+
 

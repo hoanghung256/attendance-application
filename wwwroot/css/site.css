@@ -1,22 +1,55 @@
+/* Colors */
+:root {
+    --lightSteel: rgba(162, 181, 205, 1);
+    --backgroundColor: rgba(224, 224, 224, 100);
+}
+
 html {
-  font-size: 14px;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 body {
-  margin-bottom: 60px;
+    background-color: var(--backgroundColor);
+}
+
+.side-bar {
+    margin-left: -15px;
+}
+
+.main-content {
+    margin-left: 15px;
+}
+
+.header, .navbar, .main-content {
+    border-radius: 15px;
+}
+
+.main-content {
+    min-height: min-content;
+    height: 700px;
+}
+
+.bi {
+    font-size: 25px;
+    width: 40px;
+}
+
+.navbar-nav .nav-item:hover, a:hover {
+    color: cornflowerblue !important;
+}
+
+.active-link {
+    color: cornflowerblue !important;
 }

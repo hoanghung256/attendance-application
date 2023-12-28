@@ -1,10 +1,13 @@
-﻿/* Colors */
-:root {
-    --lightSteel: rgba(162, 181, 205, 1);
+﻿body {
+    background-color: var(--lightSteel);
 }
 
-body {
-    background-color: var(--lightSteel);
+.side-bar, .header {
+    display: none;
+}
+
+.main-content {
+    background: var(--lightSteel) !important;
 }
 
 .login {
@@ -43,4 +46,3 @@ body {
         border-radius: 5px;
         background-color: var(--lightSteel);
     }
-
