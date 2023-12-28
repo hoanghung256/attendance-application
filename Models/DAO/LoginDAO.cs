@@ -6,49 +6,53 @@ namespace AttendanceApplication.Models.DAO
     public class LoginDAO
     {
         private const string connString = "Data Source=localhost; Initial Catalog=AttendanceApplication; User ID=SA; Password=2562004; Integrated Security=True";
-        public LoginModel checkLogin(string username, string password)
+        public Login checkLogin(string username, string password)
         {
-            LoginModel loginModel = new LoginModel();
+            Login loginModel = new Login();
             using (SqlConnection dbConnection = new SqlConnection(connString))      //initilize a new connection 
             {
                 dbConnection.Open();        //open DB
-                DbTransaction transaction = dbConnection.BeginTransaction();        //initilize a new DbTransaction object (DbTransaction class define behaviours of transactions toward DB)
-                try
+                using (SqlTransaction transaction = dbConnection.BeginTransaction())        //initilize a new SqlTransaction object
                 {
-                    int timeout = 30;       //wait time for SQL commands
-                    string commandText = "SELECT * FROM [AttendanceApplication].[dbo].[Account]" +
-                        "WHERE username ='" + username + "' AND password = '" + password + "'";     //contain SQL commands
-                    SqlCommand command = new SqlCommand(commandText, transaction.Connection as SqlConnection, (SqlTransaction)transaction);
-                    command.CommandTimeout = timeout;       //set time out for command, if SQL commands execute beyound this time, it will be terminated and throw an exception
-
-                    // load
-
-                    // if select
-                    using (SqlDataReader reader = command.ExecuteReader())      //initilize a reader
+                    try
                     {
-                        while (reader.Read()) {
-                            loginModel.Username = (string)reader[0];
-                            loginModel.Password = (string)reader[1];
-                            loginModel.Role = (string)reader[2];
+                        string query = "SELECT * FROM [AttendanceApplication].[dbo].[Account]" +
+                            "WHERE username=@Username AND password=@Password";
+
+                        using (SqlCommand command = new SqlCommand(query, dbConnection, transaction)) // Pass the transaction to the SqlCommand
+                        {
+                            command.Parameters.AddWithValue("@Username", username);
+                            command.Parameters.AddWithValue("@Password", password);
+
+                            command.CommandTimeout = 30;
+
+                            // When SELECT you need to use ExecuteReader    
+                            using (SqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    loginModel.Username = (string)reader[0];
+                                    loginModel.Password = (string)reader[1];
+                                }
+                            }
                         }
-                            
+
+                        //  cause select => db unchange, after select use rollback to make sure
+                        transaction.Rollback();
+                        // if insert, update, delete => use: transaction.Commit();
+
                     }
-
-                    //  cause select => db unchange, after select use rollback to make sure
-                    transaction.Rollback();
-                    // if insert, update, delete => use: transaction.Commit();
-
-                }
-                catch (Exception ex)
-                {
-                    // if exception occur => use rollback to prevent data lossing
-                    transaction.Rollback();
-                    Console.WriteLine(ex.Message);
-                    throw;
-                }
-                finally
-                {
-                    dbConnection.Close();
+                    catch (Exception ex)
+                    {
+                        // if exception occur => use rollback to prevent data lossing
+                        transaction.Rollback();
+                        Console.WriteLine(ex.Message);
+                        throw;
+                    }
+                    finally
+                    {
+                        dbConnection.Close();
+                    }
                 }
             }
 

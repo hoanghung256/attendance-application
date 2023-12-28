@@ -13,7 +13,7 @@ namespace AttendanceApplication.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login(LoginModel model)
+        public IActionResult Login(Login model)
         {
             string username = model.Username;
             string password = model.Password;
