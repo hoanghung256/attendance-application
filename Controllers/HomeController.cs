@@ -1,5 +1,5 @@
-﻿using AttendanceApplication.Models;
-using AttendanceApplication.Models.DAO;
+﻿using AttendanceApplication.DAO;
+using AttendanceApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AttendanceApplication.Controllers
@@ -15,6 +15,7 @@ namespace AttendanceApplication.Controllers
                 return RedirectToAction("Login", "Account");
 
             }
+            //get detail information of staff here (image, name, role)
             return View();
         }
 
@@ -32,11 +33,6 @@ namespace AttendanceApplication.Controllers
 
             AttendanceStatus userStatus = dao.InsertCheckInStatus(username, checkInTime, checkInDate, position);
 
-            if (userStatus == null)
-            {
-                SetViewBag("Check In failed!", "There are may occur a error, you need to Check In again!");
-                return PartialView("_CheckIn");
-            }
             Response.Cookies.Append("workingStatus", "working");
             Response.Cookies.Append("checkInTime", checkInTime);
             Response.Cookies.Append("checkInDate", checkInDate);
@@ -62,8 +58,6 @@ namespace AttendanceApplication.Controllers
             }
             else if (checkInDate != checkOutDate)
             {
-                Console.WriteLine(checkInDate.ToString());
-                Console.WriteLine(checkOutDate);
                 SetViewBag("Check Out failed!", "The date you check-in is different from the check-out date, system will not count for this session!");
                 Response.Cookies.Append("workingStatus", "off");
                 return PartialView("_CheckIn");

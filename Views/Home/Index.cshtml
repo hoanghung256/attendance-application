@@ -16,7 +16,7 @@
             <div class="form pt-5">
                 <label class="form-label">Choose working position: </label>
 
-                <select class="form-select" name="position">
+                <select class="form-select" name="position" title="position-options">
                     <option value="Office">Office</option>
                     <option value="Home">Home</option>
                     <option value="Go business">Go business</option>
@@ -27,7 +27,7 @@
 
     <div class="col-6 d-flex justify-content-center">
         <div>
-            <button type="button" class="submit-button" data-toggle="ajax-modal-checkout" data-target="#checkOutResult">@Html.ActionLink("CHECK OUT", "CheckOut", "Home", null, new { @class = "text-decoration-none" })</button>
+            <button type="button" class="submit-button" data-toggle="ajax-modal-checkout" data-target="#checkOutResult" data-url="@Url.Action("CheckOut")">CHECK OUT</button>
         </div>
     </div>
 </div>
@@ -53,7 +53,7 @@
                     time.innerText = data.datetime.substring(11, 16) + " PM";
                 }
                 date.innerText = data.datetime.substring(0, 10);
-                day.innerText = daysOfWeek[data.day_of_week];
+                day.innerText = daysOfWeek[data.day_of_week - 1];
             })
             .catch(error => console.error('Error:', error));
     }
