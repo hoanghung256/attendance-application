@@ -2,22 +2,25 @@
 {
     public class Staff
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public int Age { get; set; }
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public DateOnly Dob { get; set; }
+        public double SalaryScale { get; set; }
+        public string Department { get; set; }
+        public int AnnualLeave { get; set; }
 
         public Staff() { }
 
-        public Staff(string Id, string Name, int Age)
+        public Staff(string username, string firstName, string lastName, DateOnly dob, double salaryScale, string department, int annualLeave) 
         {
-            this.Id = Id;
-            this.Name = Name;
-            this.Age = Age;
-        }
-
-        public override string? ToString()  
-        {
-            return "Staff{ID = " + Id + ", Name = " + Name + ", Age = " + Age + "}";
+            Username = username;
+            FirstName = firstName;
+            LastName = lastName;
+            Dob = dob;
+            SalaryScale = salaryScale;
+            Department = department;
+            AnnualLeave = annualLeave;
         }
     }
 }

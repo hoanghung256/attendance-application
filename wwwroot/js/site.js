@@ -7,7 +7,7 @@
 //Handle active page link
 let links = document.getElementsByTagName("a");
 
-for (var i = 0; i < links.length; i++) {
+for (var i = 1; i < links.length; i++) {
     if (links[i].href == document.URL) {
         links[i].classList.add("active-link");
         links[i].previousElementSibling.classList.add("active-link");
@@ -35,7 +35,7 @@ $(function () {
 });
 
 $(function () {
-    $('button[data-toggle="ajax-modal-checkout]').click(function (event) {
+    $('button[data-toggle="ajax-modal-checkout"]').click(function (event) {
         event.preventDefault();
 
         $.ajax({
@@ -45,6 +45,23 @@ $(function () {
                 //Handle response from server here
                 $('#PlaceHolderHere').html(response);
                 $('#PlaceHolderHere').find('.modal').modal('show');
+            }
+        });
+    });
+});
+
+//Handle modal popup
+$(function () {
+    $('button[data-toggle="ajax-modal-user-detail"]').click(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: '/Profile/Detail', //URL Action
+            type: 'POST',
+            success: function (response) {
+                //Handle response from server here
+                $('#UserDetailPlaceHolder').html(response);
+                $('#UserDetailPlaceHolder').find('.modal').modal('show');
             }
         });
     });

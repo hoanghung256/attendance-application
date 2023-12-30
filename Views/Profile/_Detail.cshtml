@@ -1,0 +1,43 @@
+﻿@model AttendanceApplication.Models.Staff
+
+<div class="modal fade" id="userDetail">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content  container-fluid">
+            <div class="modal-header">
+                <h4 class="modal-title">Detail Information</h4>
+                <button type="button" class="close border-0 bg-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <img src="~/images/default-avatar.png" alt="Image not found" class="rounded-circle" width="100" height="100">
+                    </div>
+                    <div class="d-flex flex-column"> 
+                        <p><strong>Username: </strong>@(Context.Request.Cookies["username"])</p>
+                        <p class="=mt-0 mb-0">@(Context.Request.Cookies["role"])</p>
+                    </div>
+                </div>
+                <div>
+                    @if (Model != null)
+                    {
+                        <p><strong>Username: </strong>@Model.Username</p>
+                        <p><strong>Name: </strong>@Model.LastName @Model.FirstName</p>
+                        <p><strong>Date of birth: </strong>@Model.Dob</p>
+                        <p><strong>Salary scale: </strong>@Model.SalaryScale</p>
+                        <p><strong>Department: </strong>@Model.Department</p>
+                        <p><strong>Annual leave: </strong>@Model.AnnualLeave @(Model.AnnualLeave > 1 ? "days" : "day")</p>
+                    }
+                    else
+                    {
+                        <p class="text-danger">There are may occur a error when access your detail information!</p>
+                    }
+                </div>
+            </div>
+            <div>
+                <button type="button" class="btn" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
