@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using AttendanceApplication.Models;
-using AttendanceApplication.Models.DAO;
+using AttendanceApplication.DAO;
 
 namespace AttendanceApplication.Controllers
 {
@@ -24,9 +24,10 @@ namespace AttendanceApplication.Controllers
             {
                 ViewBag.Error = "Login failed. Please try again!";
                 return View();
-            } 
+            }
             Response.Cookies.Append("userLogedIn", "true");
-            Response.Cookies.Append("username", username);
+            Response.Cookies.Append("username", model.Username);
+            Response.Cookies.Append("role", model.Role);
             return RedirectToAction("Index", "Home");
         }
 

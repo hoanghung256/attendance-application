@@ -1,5 +1,4 @@
-﻿using AttendanceApplication.Models.DAO;
-using AttendanceApplication.Models;
+﻿using AttendanceApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

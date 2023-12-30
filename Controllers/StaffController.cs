@@ -1,10 +1,10 @@
-﻿using AttendanceApplication.Models;
-using AttendanceApplication.Models.DAO;
+﻿using AttendanceApplication.DAO;
+using AttendanceApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace AttendanceApplication.Controllers	
+namespace AttendanceApplication.Controllers
 {
-	public class StaffController : Controller
+    public class StaffController : Controller
 	{
 		// GET: StudentController
 		public ActionResult Index()
@@ -16,8 +16,8 @@ namespace AttendanceApplication.Controllers
                
             }
             StaffDAO staffDAO = new StaffDAO();
-            List<Staff> staffs = staffDAO.SelectAll();
-            return View(staffs);
+            //List<Staff> staffs = staffDAO.SelectAll();
+            return View();
         }
 
 		// GET: StudentController/Details/5

@@ -7,11 +7,28 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/AttendanceApplication.styles.css" asp-append-version="true" />
+    <!--Boostrap icon-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css"> 
 </head>
 <body>
     <div class="p-3">
-        <div class="header bg-white p-3">
-            <a class="navbar-brand text-black" asp-area="" asp-controller="Account" asp-action="Index">AttendanceApplication</a>
+        <!-- Header -->
+        <div class="header d-flex justify-content-between align-items-center p-2 bg-white ">
+            <div class="">
+                <a class="navbar-brand text-black" asp-area="" asp-controller="Home" asp-action="Index">AttendanceApplication</a>
+            </div>
+            <div class="d-flex">
+                <div class="align-self-center" style="padding-right: 10px;">
+                    <img src="~/images/default-avatar.png" alt="Image not found" class="rounded-circle" width="40" height="40">
+                </div>
+                <div class="align-self-center ml-3">
+                    <strong>@(Context.Request.Cookies["username"])</strong>
+                    <p class="=mt-0 mb-0">@(Context.Request.Cookies["role"])</p>
+                </div>
+                <div class="px-2">
+                    <button class="border-0 bg-white" data-toggle="ajax-modal-user-detail" data-target="#userDetail" data-url="@Url.Action("Detail")"><i class="bi bi-chevron-down"></i></button>
+                </div>
+            </div>
         </div>
 
         <div class="container-fluid p-3">
@@ -27,11 +44,11 @@
                             <ul class="navbar-nav flex-column">
                                 <li class="nav-item d-inline-flex">
                                     <i class="bi bi-house"></i>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Attendance" asp-action="Index">Home</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                 </li>
                                 <li class="nav-item d-inline-flex">
                                     <i class="bi bi-calendar"></i>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">Attendance</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Attendance" asp-action="Index">Attendance</a>
                                 </li>
                                 <li class="nav-item d-inline-flex">
                                     <i class="bi bi-envelope-paper"></i>
@@ -59,6 +76,8 @@
             </div>
         </div>
     </div>
+
+    <div id="UserDetailPlaceHolder"></div>
 
    @* <footer class="border-top footer text-muted">
         <div class="container">
